@@ -4,7 +4,7 @@ RUN rm -rf /usr/local/tomcat/webapps/* &&\
       rm -rf conf/context.xml
 
 # Copy source files to tomcat folder structure
-COPY ./Java_application/target/vprofile-v1.war /usr/local/tomcat/webapps/ROOT.war
+COPY ./target/vprofile-v1.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
 # CMD ["catalina.sh", "run"]
