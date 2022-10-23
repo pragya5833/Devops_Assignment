@@ -141,7 +141,7 @@
 		    <plugin>
 		        <groupId>org.jacoco</groupId>
 		        <artifactId>jacoco-maven-plugin</artifactId>
-		        <version>0.7.2.201409121644</version>
+		        <version>0.8.7</version>
 		        <executions>
 		            <execution>
 		                <id>jacoco-initialize</id>
@@ -161,10 +161,10 @@
 		</plugin>
         </plugins>
     </build>
-	<repositories>
+	<!-- <repositories>
     <repository>
       <id>${NEXUS-GRP-REPO}</id>
       <url>http://${NEXUSIP}:${NEXUSPORT}/repository/${NEXUS-GRP-REPO}/</url>
     </repository>
-  </repositories>
+  </repositories> -->
 </project>
