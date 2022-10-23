@@ -39,7 +39,7 @@ pipeline{
                             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                         ]]){
                         sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 848417356303.dkr.ecr.ap-south-1.amazonaws.com'
-                        sh 'docker build -t vprof:1.0 --build-arg WAR_ARCHIVE=vprofile-v1.war'
+                        sh 'docker build -t vprof:1.0 --build-arg=WAR_ARCHIVE=vprofile-v1.war .'
                         sh 'docker tag vprof:1.0 848417356303.dkr.ecr.ap-south-1.amazonaws.com/vprof:latest'
                         sh 'docker push 848417356303.dkr.ecr.ap-south-1.amazonaws.com/vprof:latest'
                     }
