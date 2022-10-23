@@ -46,7 +46,8 @@ pipeline{
                 echo 'deploy to prod'
             }
         }
-        post {
+    }
+    post {
                 always {
                     junit 'target/surefire-reports/*.xml' 
                 }
@@ -54,5 +55,4 @@ pipeline{
                     archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
-    }
 }
