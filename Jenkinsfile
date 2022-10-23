@@ -32,7 +32,7 @@ pipeline{
         stage ('Build Image'){
             steps{
                 script{
-                  docker.withRegistry('https://hub.docker.com/', 'dockerhub') {
+                  docker.withRegistry('tcp://127.0.0.1:3375', 'dockerhub') {
                 sh 'docker build -t vprof:1.0 --build-arg=WAR_ARCHIVE=vprofile-v1.war .'
                         sh 'docker tag vprof:1.0 848417356303.dkr.ecr.ap-south-1.amazonaws.com/vprof:latest'
                 }
