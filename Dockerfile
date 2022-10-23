@@ -4,7 +4,7 @@ RUN rm -rf /usr/local/tomcat/webapps/* &&\
       rm -rf conf/context.xml
 
 # Copy source files to tomcat folder structure
-COPY ${WAR_ARCHIVE} /usr/local/tomcat/webapps/ROOT.war
+COPY $WAR_ARCHIVE /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
 # CMD ["catalina.sh", "run"]
