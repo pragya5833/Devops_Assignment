@@ -31,9 +31,11 @@ pipeline{
         }
         stage ('Build Image'){
             steps{
-                docker.withRegistry('https://hub.docker.com/', 'dockerhub') {
+                script{
+                  docker.withRegistry('https://hub.docker.com/', 'dockerhub') {
                 sh 'docker build -t vprof:1.0 --build-arg=WAR_ARCHIVE=vprofile-v1.war .'
                         sh 'docker tag vprof:1.0 848417356303.dkr.ecr.ap-south-1.amazonaws.com/vprof:latest'
+                }
                 }
             }
         }
