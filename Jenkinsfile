@@ -11,8 +11,8 @@ pipeline{
             steps{
                 checkout scm: ([
                     $class: 'GitSCM',
-                    userRemoteConfigs: [[credentialsId: 'b03c1955-a7a5-46ff-ac05-8ad25a8cb019',url: ${project_url}]],
-                    branches: [[name: ${Branch}]]
+                    userRemoteConfigs: [[credentialsId: 'b03c1955-a7a5-46ff-ac05-8ad25a8cb019',url: "${project_url}"]],
+                    branches: [[name: "${Branch}"]]
             ])
             }
         }
