@@ -31,13 +31,21 @@ pipeline{
         }
         stage('Push'){
             steps{
-                sh ''
+                script{
+                    docker.withRegistry('https://848417356303.dkr.ecr.ap-south-1.amazonaws.com', 'jenkins-aws') {
+                        sh 'docker build -t vprof:1.0 --build-arg WAR_ARCHIVE=vprofile-v1.war'
+                        sh 'docker tag vprof:1.0 848417356303.dkr.ecr.ap-south-1.amazonaws.com/vprof:latest'
+                        sh 'docker push 848417356303.dkr.ecr.ap-south-1.amazonaws.com/vprof:latest'
+                    }
+                }
             }
 
         }
         stage('Deploy To Staging'){
             steps{
-                sh 'echo "deploy to staging"'
+                withCredentials([sshUserPrivateKey(credentialsId: "94fd9ccf-c541-4cf3-b185-cb12e8c96688", keyFileVariable: 'keyfile')]){
+                    sh "ssh -i ${keyfile} ec2-user@65.2.35.87 && scp ./scripts/deploy.sh /tmp/deploy.sh && ./tmp/deploy.sh"
+            }
             }
         }
         stage('Deploy To Production'){
