@@ -59,7 +59,11 @@ pipeline{
         stage('Deploy To Staging'){
             steps{
                 withCredentials([sshUserPrivateKey(credentialsId: "94fd9ccf-c541-4cf3-b185-cb12e8c96688", keyFileVariable: 'keyfile')]){
-                    sh "ssh -i ${keyfile} ec2-user@65.2.35.87 && scp ./scripts/deploy.sh /tmp/deploy.sh && ./tmp/deploy.sh"
+                    sh """ssh -i ${keyfile} ec2-user@65.2.35.87 << EOF
+                    scp -i ${keyfile} ./scripts/deploy.sh ec2-user@65.2.35.87:/tmp/deploy.sh
+                    ./tmp/deploy.sh
+                    exit
+                    EOF """
             }
             }
         }
