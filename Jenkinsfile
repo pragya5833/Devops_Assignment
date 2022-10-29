@@ -64,7 +64,7 @@ pipeline{
         stage('Deploy To Production'){
             steps{
                 script{
-                    if ("${GIT_BRANCH}" == 'main') {
+                    if ("${GIT_BRANCH}" == 'origin/main') {
                         input id: 'Deploy', message: 'Deploy to production?', submitter: 'admin'
                 echo 'deploying to prod'
                 withCredentials([sshUserPrivateKey(credentialsId: "jenkins_agent_login", keyFileVariable: 'keyfile')]){
