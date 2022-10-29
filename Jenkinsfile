@@ -6,7 +6,6 @@ pipeline{
 
     environment{
         project_url ='https://github.com/pragya5833/Devops_Assignment.git'
-        branch_to_build="${env.GIT_BRANCH  ? "staging" : "production"}"
     }
     stages{
         stage('Clone'){
@@ -17,8 +16,10 @@ pipeline{
                     branches: [[name: "${env.GIT_BRANCH}"]]
             ])
             }
+
+            
         }
-        
+
         stage('Build'){
             steps{
                 sh '''
