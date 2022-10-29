@@ -25,8 +25,6 @@ pipeline{
                    mvn -B -DskipTests clean package
                 '''
             }
-
-            
         }
         stage('Test'){
             steps{
