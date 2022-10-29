@@ -58,13 +58,13 @@ pipeline{
         }
         stage('Deploy To Staging'){
             steps{
-                withCredentials([sshUserPrivateKey(credentialsId: "94fd9ccf-c541-4cf3-b185-cb12e8c96688", keyFileVariable: 'keyfile')]){
-                    sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@3.110.62.75:/tmp/deploy.sh"
-                    sh """ssh -i ${keyfile} ubuntu@3.110.62.75 << EOF
+                // withCredentials([sshUserPrivateKey(credentialsId: "94fd9ccf-c541-4cf3-b185-cb12e8c96688", keyFileVariable: 'keyfile')]){
+                    sh "scp -i /Users/pragyabharti/Devops_Assignment/Devops_Assignment/xyz.pem ./scripts/deploy.sh ubuntu@3.110.62.75:/tmp/deploy.sh"
+                    sh """ssh -i /Users/pragyabharti/Devops_Assignment/Devops_Assignment/xyz.pem ubuntu@3.110.62.75 << EOF
                     ./tmp/deploy.sh
                     exit
                     EOF """
-            }
+            // }
             }
         }
         stage('Deploy To Production'){
