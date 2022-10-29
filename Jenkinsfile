@@ -70,7 +70,15 @@ pipeline{
         stage('Deploy To Production'){
             steps{
                 input id: 'Deploy', message: 'Deploy to production?', submitter: 'admin'
-                echo 'deploy to prod'
+                echo 'deploying to prod'
+                withCredentials([sshUserPrivateKey(credentialsId: "ubuntu", keyFileVariable: 'keyfile')]){
+                    sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@43.205.140.225:/tmp/deploy.sh"
+                    sh """ssh -i ${keyfile} ubuntu@43.205.140.225 << EOF
+                           sh /tmp/deploy.sh
+                           exit
+                    EOF """
+            }
+
             }
         }
     }
