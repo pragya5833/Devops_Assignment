@@ -19,6 +19,7 @@ pipeline{
         stage('Build'){
             steps{
                 sh '''
+                  java -
                    mvn -B -DskipTests clean package
                 '''
             }
@@ -47,7 +48,7 @@ pipeline{
                             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                         ]]){
-                            sh 'docker build --build-arg WAR_ARCHIVE=./target/vprofile-v1.war -t vprof:1.0 .'
+                            sh 'docker build --platform linux/arm64/v8 --build-arg WAR_ARCHIVE=./target/vprofile-v1.war -t vprof:1.0 .'
                         sh 'docker tag vprof:1.0 848417356303.dkr.ecr.ap-south-1.amazonaws.com/vprof:latest'
                         sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 848417356303.dkr.ecr.ap-south-1.amazonaws.com'
                         sh 'docker push 848417356303.dkr.ecr.ap-south-1.amazonaws.com/vprof:latest'
