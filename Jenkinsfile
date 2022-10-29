@@ -52,9 +52,9 @@ pipeline{
         stage('Deploy To Staging'){
             steps{
                 echo 'deploying to staging'
-                withCredentials([sshUserPrivateKey(credentialsId: "ubuntu", keyFileVariable: 'keyfile')]){
-                    sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@3.110.62.75:/tmp/deploy.sh"
-                    sh """ssh -i ${keyfile} ubuntu@3.110.62.75 << EOF
+                withCredentials([sshUserPrivateKey(credentialsId: "jenkins_agent_login", keyFileVariable: 'keyfile')]){
+                    sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@13.233.85.92:/tmp/deploy.sh"
+                    sh """ssh -i ${keyfile} ubuntu@13.233.85.92 << EOF
                            sh /tmp/deploy.sh
                            exit
                     EOF """
@@ -63,15 +63,21 @@ pipeline{
         }
         stage('Deploy To Production'){
             steps{
-                input id: 'Deploy', message: 'Deploy to production?', submitter: 'admin'
+                if (${GIT_BRANCH} == 'main') {
+                        input id: 'Deploy', message: 'Deploy to production?', submitter: 'admin'
                 echo 'deploying to prod'
-                withCredentials([sshUserPrivateKey(credentialsId: "ubuntu", keyFileVariable: 'keyfile')]){
-                    sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@43.205.140.225:/tmp/deploy.sh"
-                    sh """ssh -i ${keyfile} ubuntu@43.205.140.225 << EOF
+                withCredentials([sshUserPrivateKey(credentialsId: "jenkins_agent_login", keyFileVariable: 'keyfile')]){
+                    sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@43.205.207.190:/tmp/deploy.sh"
+                    sh """ssh -i ${keyfile} ubuntu@43.205.207.190 << EOF
                            sh /tmp/deploy.sh
                            exit
                     EOF """
             }
+                    } 
+                    else {
+                        echo 'No Prod deployment as its not main branch'
+                    }
+                
 
             }
         }
