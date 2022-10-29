@@ -19,6 +19,7 @@ pipeline{
         stage('Build'){
             steps{
                 sh '''
+                printenv
                    mvn -B -DskipTests clean package
                 '''
             }
