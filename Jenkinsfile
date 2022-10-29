@@ -3,6 +3,7 @@ pipeline{
     // parameters {
     //     string(name: 'Branch', defaultValue: 'main', description: 'Branch To Build')
     // }
+    
     environment{
         project_url ='https://github.com/pragya5833/Devops_Assignment.git'
     }
@@ -19,7 +20,6 @@ pipeline{
         stage('Build'){
             steps{
                 sh '''
-                   printenv
                    mvn -B -DskipTests clean package
                 '''
             }
