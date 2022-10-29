@@ -6,6 +6,7 @@ pipeline{
 
     environment{
         project_url ='https://github.com/pragya5833/Devops_Assignment.git'
+        branch_to_build="${env.GIT_BRANCH  ? "staging" : "production"}"
     }
     stages{
         stage('Clone'){
@@ -13,7 +14,7 @@ pipeline{
                 checkout scm: ([
                     $class: 'GitSCM',
                     userRemoteConfigs: [[credentialsId: 'b03c1955-a7a5-46ff-ac05-8ad25a8cb019',url: "${project_url}"]],
-                    branches: [[name: "${Branch}"]]
+                    branches: [[name: "${env.GIT_BRANCH}"]]
             ])
             }
         }
