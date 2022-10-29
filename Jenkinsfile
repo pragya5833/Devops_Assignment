@@ -16,8 +16,6 @@ pipeline{
                     branches: [[name: "${env.GIT_BRANCH}"]]
             ])
             }
-
-            
         }
 
         stage('Build'){
@@ -84,7 +82,7 @@ pipeline{
             //                exit
             //         EOF """
             // }
-            //$GWBT_REF
+            //
 
             }
         }
