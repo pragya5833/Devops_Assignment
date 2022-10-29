@@ -3,9 +3,9 @@ pipeline{
     environment{
         project_url ='https://github.com/pragya5833/Devops_Assignment.git'
     }
-    parameters {
-        string(name: 'Branch', defaultValue: 'main', description: 'Branch To Build')
-    }
+    // parameters {
+    //     string(name: 'Branch', defaultValue: 'main', description: 'Branch To Build')
+    // }
     stages{
         stage('Clone'){
             steps{
