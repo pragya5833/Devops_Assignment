@@ -58,26 +58,26 @@ pipeline{
         }
         stage('Deploy To Staging'){
             steps{
-                withCredentials([sshUserPrivateKey(credentialsId: "ubuntu", keyFileVariable: 'keyfile')]){
-                    sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@3.110.62.75:/tmp/deploy.sh"
-                    sh """ssh -i ${keyfile} ubuntu@3.110.62.75 << EOF
-                           sh /tmp/deploy.sh
-                           exit
-                    EOF """
-            }
+            //     withCredentials([sshUserPrivateKey(credentialsId: "ubuntu", keyFileVariable: 'keyfile')]){
+            //         sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@3.110.62.75:/tmp/deploy.sh"
+            //         sh """ssh -i ${keyfile} ubuntu@3.110.62.75 << EOF
+            //                sh /tmp/deploy.sh
+            //                exit
+            //         EOF """
+            // }
             }
         }
         stage('Deploy To Production'){
             steps{
                 input id: 'Deploy', message: 'Deploy to production?', submitter: 'admin'
                 echo 'deploying to prod'
-                withCredentials([sshUserPrivateKey(credentialsId: "ubuntu", keyFileVariable: 'keyfile')]){
-                    sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@43.205.140.225:/tmp/deploy.sh"
-                    sh """ssh -i ${keyfile} ubuntu@43.205.140.225 << EOF
-                           sh /tmp/deploy.sh
-                           exit
-                    EOF """
-            }
+            //     withCredentials([sshUserPrivateKey(credentialsId: "ubuntu", keyFileVariable: 'keyfile')]){
+            //         sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@43.205.140.225:/tmp/deploy.sh"
+            //         sh """ssh -i ${keyfile} ubuntu@43.205.140.225 << EOF
+            //                sh /tmp/deploy.sh
+            //                exit
+            //         EOF """
+            // }
 
             }
         }
