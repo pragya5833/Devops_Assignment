@@ -19,7 +19,6 @@ pipeline{
         stage('Build'){
             steps{
                 sh '''
-                  java -
                    mvn -B -DskipTests clean package
                 '''
             }
