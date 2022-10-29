@@ -1,30 +1,30 @@
 pipeline{
     agent { label 'docker-slave' }
-    parameters {
-        string(name: 'Branch', defaultValue: 'main', description: 'Branch To Build')
-    }
-
     environment{
         project_url ='https://github.com/pragya5833/Devops_Assignment.git'
     }
+    // parameters {
+    //     string(name: 'Branch', defaultValue: 'main', description: 'Branch To Build')
+    // }
+
+    
     stages{
         stage('Clone'){
             steps{
                 checkout scm: ([
                     $class: 'GitSCM',
                     userRemoteConfigs: [[credentialsId: 'b03c1955-a7a5-46ff-ac05-8ad25a8cb019',url: "${project_url}"]],
-                    branches: [[name: "${env.GIT_BRANCH}"]]
+                    branches: [[name: "${GIT_BRANCH}"]]
             ])
             }
-        }
 
+        }
         stage('Build'){
             steps{
                 sh '''
                 printenv
                    mvn -B -DskipTests clean package
                 '''
-                
             }
         }
         stage('Test'){
@@ -83,7 +83,6 @@ pipeline{
             //                exit
             //         EOF """
             // }
-            //
 
             }
         }
