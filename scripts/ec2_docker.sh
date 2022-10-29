@@ -10,3 +10,4 @@ sudo add-apt-repository \
 sudo apt-get update -y
 sudo apt-get install -y docker-ce
 sudo usermod -aG docker ubuntu
+sudo apt-get install -y awscli
