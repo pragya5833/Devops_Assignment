@@ -6,8 +6,6 @@ pipeline{
     // parameters {
     //     string(name: 'Branch', defaultValue: 'main', description: 'Branch To Build')
     // }
-
-
     stages{
         stage('Clone'){
             steps{
@@ -22,7 +20,7 @@ pipeline{
         stage('Build'){
             steps{
                 sh '''
-                   printenv
+                printenv
                    mvn -B -DskipTests clean package
                 '''
             }
