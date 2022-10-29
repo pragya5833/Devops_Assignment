@@ -1,10 +1,10 @@
 pipeline{
     agent { label 'docker-slave' }
-    environment{
-        project_url ='https://github.com/pragya5833/Devops_Assignment.git'
-    }
     parameters {
         string(name: 'Branch', defaultValue: 'main', description: 'Branch To Build')
+    }
+    environment{
+        project_url ='https://github.com/pragya5833/Devops_Assignment.git'
     }
     stages{
         stage('Clone'){
@@ -19,6 +19,7 @@ pipeline{
         stage('Build'){
             steps{
                 sh '''
+                   env
                    mvn -B -DskipTests clean package
                 '''
             }
@@ -79,6 +80,7 @@ pipeline{
             //                exit
             //         EOF """
             // }
+            //$GWBT_REF
 
             }
         }
