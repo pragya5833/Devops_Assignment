@@ -58,6 +58,7 @@ pipeline{
         }
         stage('Deploy To Staging'){
             steps{
+                echo 'deploying to staging'
             //     withCredentials([sshUserPrivateKey(credentialsId: "ubuntu", keyFileVariable: 'keyfile')]){
             //         sh "scp -i ${keyfile} ./scripts/deploy.sh ubuntu@3.110.62.75:/tmp/deploy.sh"
             //         sh """ssh -i ${keyfile} ubuntu@3.110.62.75 << EOF
